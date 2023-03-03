@@ -16,6 +16,7 @@ This contains two modules -
 * It should generate an unique token to identify user.
 * User should have provision to update password.
 * User can logout from the system. When user logs out, he/she should not be able to call any of the APIs.
+* There should be admin user who can add/update the books
 
 #### Books module - 
   * User should have access to view all books available in the library. Each book detail should either user to borrow or already borrowed.
@@ -25,5 +26,7 @@ This contains two modules -
   * When user passes book_id and return date, user should be assigned with the book
   * the book should be marked as borrowed and return date will be filled
   * User can return the book before or on the return date. If the book is returned after the return date, include the total time taken from return date to current date
+  * Admin can create or update the books
+  
 
 
