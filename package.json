@@ -1,0 +1,26 @@
+{
+  "name": "librarymanagementtraining",
+  "version": "1.0.0",
+  "description": "Basic library management system",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "nodemon test/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cjs-module": "^1.5.0",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "git": "^0.1.5",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.21",
+    "routes": "^2.1.0",
+    "save": "^2.9.0",
+    "uuid": "^9.0.0"
+  }
+}
