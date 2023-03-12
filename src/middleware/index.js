@@ -1,27 +1,29 @@
-// const multer = require("multer");
+const jwt=require('jsonwebtoken')
 
-const middleware = {};
+//secret key
+const SECRET_KEY="Library"
 
-middleware.isLoggedIn = function(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
+//auth function
+const auth=(req,res,next)=>{
+    try{
+        let token=req.headers.authorization
+        if(token){
+            let user=jwt.verify(token,SECRET_KEY) // token verify
+            req.user_id=user.id
+        }else{
+            return res.json({
+                response_message:"Unauthorized User",
+                response_status:"401"
+            })
+        }
+        next()
+    }catch(error){
+        res.json({
+            response_message:"Unauthorized User",
+            response_status:"401"
+        })
     }
-    req.flash("error", "You need to be logged in first");
-    res.redirect("/");
-};
+}
 
-middleware.isAdmin = function(req, res, next) {
-    if(req.isAuthenticated() && req.user.isAdmin) {
-        return next();
-    }
-    req.flash("error", "Sorry, this route is allowed for admin only");
-    res.redirect("/");
-};
-
-// middleware.upload = multer({
-//       limits: {
-//         fileSize: 4 * 1024 * 1024,
-//       }
-//     });
-
-module.exports = middleware;
+//exports the function
+module.exports=auth
