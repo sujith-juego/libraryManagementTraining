@@ -4,6 +4,7 @@ const userData = require('../json/userJson.json')
 
 const fs = require('fs');             //filesystem library
 const jwt = require('jsonwebtoken')
+const SECRET_KEY = "Library"
 
 const register = async (req, res) => {
   const { user_name, mail, password} = req.body
