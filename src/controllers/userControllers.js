@@ -3,12 +3,13 @@ const userData = require('../json/userJson.json')
 // const { v4: uuidv4 } = require('uuid');
 
 const fs = require('fs');             //filesystem library
+const jwt = require('jsonwebtoken')
 
 const register = async (req, res) => {
-  const { user_name, mail, password, user_role } = req.body
+  const { user_name, mail, password} = req.body
   try {
     //checking if empty
-    if (!user_name || !mail || !password || !user_role) {             
+    if (!user_name || !mail || !password ) {             
       return res.json({
         response_message: "PLEASE ENTER ALL THE FIELDS",
         response_status: "400"
@@ -17,7 +18,7 @@ const register = async (req, res) => {
 
     //mail validation
     let validEmail = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})$/                                     
-    if (!mail.match(validEmail) || (typeof user_name == "number") || (typeof password != "string") || (typeof user_role != "string")) {
+    if (!mail.match(validEmail) || (typeof user_name == "number") || (typeof password != "string")) {
       return res.json({
         response_message: "Invalid credentials",
         response_status: "401"
@@ -42,15 +43,10 @@ const register = async (req, res) => {
     const obj = {
       user_id: index,
       user_name: user_name,
-      mail: mail,
-      user_role: user_role
+      mail: mail
     }
     await userData.push(obj);            //adding new user to the json object
-    await fs.writeFile('./json/userJson.json', JSON.stringify(userData, null, 2), (err) => {
-      if (err) {
-        return res.status(500).json({ message: err })
-      }
-      else {
+    await fs.writeFile('./json/userJson.json', JSON.stringify(userData, null, 2))
         return res.json({
           response_message: "User Registered Successfully",
           response_status: "200",
