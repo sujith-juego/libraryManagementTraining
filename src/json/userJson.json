@@ -12,5 +12,12 @@
     "mail": "sujithprabhu38@gmail.com",
     "hashedPassword": "$2b$10$alDwE23wZ8U7poFkQ21ZkOOBDImSmNb/JgaT3c9J7Id.G6Xpb348e",
     "user_role": "admin"
+  },
+  {
+    "user_id": "mEvzryNzk8ejC1BUV_ulWSMBpldx8SOVW7P_lXc9",
+    "user_name": "ram",
+    "mail": "ram535@gmail.com",
+    "hashedPassword": "$2b$10$IuPXMOiSOpPTVZsMKr/WGeIZpTXFRQbhBGanOakWfjPyxAL8LSNza",
+    "user_role": "student"
   }
 ]

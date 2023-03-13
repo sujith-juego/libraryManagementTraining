@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken')
 const util = require('util')
 const { writeFile } = require('fs')
 const bcrypt = require("bcrypt")
-// const { randomUUID } = require('crypto');
 const generateSafeId = require('generate-safe-id')
 const { error } = require('console')
 const SECRET_KEY = "Library"
@@ -46,7 +45,6 @@ const register = async (req, res) => {
     //return res.json(userData)  //==>working
 
     // if not exist then create new user
-    // let index = randomUUID()
     let id = generateSafeId()         //creating unique id
     const hashedPassword = await bcrypt.hash(password,10)     //password hashing
     // return res.json(id)    =>working
@@ -103,26 +101,27 @@ const login = async (req, res) => {
     const user = await userData.find((userData) => {
       return userData.mail == mail
     })
-    const index = userData.indexof(mail)
-
+console.log(user)        //==>working
     if (!user) {
       return res.json({
         response_message: "User Not Found",
         response_status: "404"
       })
     }
-    const hashedPassword = await bcrypt.hash(password,10)     //password hashing
 
-    if (hashedPassword != userData[index].hashedPassword) {
+
+    const hashedPassword = await bcrypt.hash(password,10)     //password hashing
+    console.log(hashedPassword)
+    if (hashedPassword != user.hashedPassword) {
       return res.json({
         response_message: "Invalid password",
         response_status:"412"
       })
       
   }
-  res.send(`Mail: ${mail} Password: ${password}`);
+  // res.send(`Mail: ${mail} Password: ${password}`);
   } catch (error) {
-    
+    res.send(error)
   }
   
 
