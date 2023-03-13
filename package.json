@@ -16,6 +16,7 @@
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "fs-extra": "^11.1.0",
     "generate-safe-id": "^1.0.3",
     "git": "^0.1.5",
     "http-errors": "^2.0.0",

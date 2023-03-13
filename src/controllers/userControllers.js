@@ -1,7 +1,9 @@
 const userData = require('../json/userJson.json')
 
 const fs = require('fs');             //filesystem library
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
+const util = require('util')
+const { writeFile } = require('fs')
 // const { randomUUID } = require('crypto');
 const generateSafeId = require('generate-safe-id')
 const SECRET_KEY = "Library"
@@ -54,13 +56,32 @@ const register = async (req, res) => {
     // return res.json(obj) ===>working
     userData.push(obj);            //adding new user to the json object
     // return res.json(userData)==>working
-    // await fs.promises.writeFile('../json/userJson.json', JSON.stringify(userData, null, 2))    //==> err
-    fs.writeFile('../json/userJson.json', JSON.stringify(userData,null,2))
-      return res.json({
+    const jsonString = JSON.stringify(userData, null, 2)
+    // await fs.promises.writeFileSync('../json/userJson.json', jsonString )     
+    
+    // fs.writeFile('../json/userJson.json', JSON.stringify(userData,null,2))
+      // return res.json({
+      //   response_message: "User Registered Successfully",
+      //   response_status: "200",
+      //   response_object: obj
+      // })
+      const path = '/home/sujithprabhu/Desktop/Project111/libraryManagement/src/json/userJson.json'
+      writeFile(path, jsonString, (error) => {
+        if (error) {
+          return res.json({
+            response_message:`An error has occurred  ${error}`,
+            response_status:"422"
+        })
+      } else {
+        return res.json({
         response_message: "User Registered Successfully",
         response_status: "200",
         response_object: obj
       })
+    }
+    })
+
+
 
     }catch(error) {
       console.log(error);
