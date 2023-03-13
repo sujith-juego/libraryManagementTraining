@@ -1,19 +1,20 @@
 const userData = require('../json/userJson.json')
 
-const fs = require('fs');             //filesystem library
+const fs = require('fs')             //filesystem library
 const jwt = require('jsonwebtoken')
 const util = require('util')
 const { writeFile } = require('fs')
+const bcrypt = require("bcrypt")
 // const { randomUUID } = require('crypto');
 const generateSafeId = require('generate-safe-id')
 const SECRET_KEY = "Library"
 
 const register = async (req, res) => {
-  const { user_name, mail, password} = req.body
+  const { user_name, mail, user_role, password} = req.body
 
   try {
     //checking if empty
-    if (!(user_name && mail && password) ) {             
+    if (!(user_name && mail && password && user_role) ) {             
       return res.json({
         response_message: "PLEASE ENTER ALL THE FIELDS",
         response_status: "400"
@@ -21,7 +22,7 @@ const register = async (req, res) => {
     }
     //mail validation
     let validEmail = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})$/                                     
-    if (!mail.match(validEmail) || (typeof user_name == "number") || (typeof password != "string")) {
+    if (!mail.match(validEmail) || (typeof user_name == "number") || (typeof password != "string") || (typeof user_role != "string")) {
       return res.json({
         response_message: "Invalid credentials",
         response_status: "401"
@@ -45,13 +46,16 @@ const register = async (req, res) => {
 
     // if not exist then create new user
     // let index = randomUUID()
-    let id = generateSafeId()
+    let id = generateSafeId()         //creating unique id
+    const hashedPassword = await bcrypt.hash(password,10)     //password hashing
     // return res.json(id)    =>working
     // let index = userData.length + 1
     const obj = {
       user_id: id,
       user_name: user_name,
-      mail: mail
+      mail: mail,
+      hashedPassword: hashedPassword,
+      user_role: user_role
     }
     // return res.json(obj) ===>working
     userData.push(obj);            //adding new user to the json object

@@ -1,21 +1,16 @@
 [
   {
-    "user_id": "001",
-    "mail": "sujithprabhu38@gmail.com",
+    "user_id": "qGj7CwXENkf-0aEo0jcIN165ZhRXoM13ZveoKSdJ",
+    "user_name": "Ramesh",
+    "mail": "ramesh11@gmail.com",
+    "hashedPassword": "$2b$10$PYsh0l3yzDkfp3DdashSp.2Dt48I42Cwc7Kb/apxMMf/jDUJo4eUG",
+    "user_role": "student"
+  },
+  {
+    "user_id": "WPF_XBbJEYMzA4efWX3NLw1RRDA9JkUibY5sxU-D",
     "user_name": "sujith",
-    "password": "123456789",
-    "user_role": "Admin"
-  },
-  {
-    "user_id": "002",
-    "mail": "abcd@gmail.com",
-    "user_name": "abcd",
-    "password": "2323536393",
-    "user_role": "Student"
-  },
-  {
-    "user_id": "YZv98sCCePtEQ4sxT-_Uxy-DVOMsbBEMpB7dBaw_",
-    "user_name": "Dinesh",
-    "mail": "dinesh01@gmail.com"
+    "mail": "sujithprabhu38@gmail.com",
+    "hashedPassword": "$2b$10$alDwE23wZ8U7poFkQ21ZkOOBDImSmNb/JgaT3c9J7Id.G6Xpb348e",
+    "user_role": "admin"
   }
 ]
