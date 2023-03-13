@@ -7,6 +7,7 @@ const { writeFile } = require('fs')
 const bcrypt = require("bcrypt")
 // const { randomUUID } = require('crypto');
 const generateSafeId = require('generate-safe-id')
+const { error } = require('console')
 const SECRET_KEY = "Library"
 
 const register = async (req, res) => {
@@ -64,11 +65,7 @@ const register = async (req, res) => {
     // await fs.promises.writeFileSync('../json/userJson.json', jsonString )     
     
     // fs.writeFile('../json/userJson.json', JSON.stringify(userData,null,2))
-      // return res.json({
-      //   response_message: "User Registered Successfully",
-      //   response_status: "200",
-      //   response_object: obj
-      // })
+
       const path = '/home/sujithprabhu/Desktop/Project111/libraryManagement/src/json/userJson.json'
       writeFile(path, jsonString, (error) => {
         if (error) {
@@ -84,9 +81,6 @@ const register = async (req, res) => {
       })
     }
     })
-
-
-
     }catch(error) {
       console.log(error);
       return res.json({
@@ -98,9 +92,50 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
-  const { mail, password } = req.body()
+  const { mail, password } = req.body
+  try {
+    if (!(mail && password) ) {             
+      return res.json({
+        response_message: "PLEASE ENTER ALL THE FIELDS",
+        response_status: "400"
+      })
+    }
+    const user = await userData.find((userData) => {
+      return userData.mail == mail
+    })
+    const index = userData.indexof(mail)
+
+    if (!user) {
+      return res.json({
+        response_message: "User Not Found",
+        response_status: "404"
+      })
+    }
+    const hashedPassword = await bcrypt.hash(password,10)     //password hashing
+
+    if (hashedPassword != userData[index].hashedPassword) {
+      return res.json({
+        response_message: "Invalid password",
+        response_status:"412"
+      })
+      
+  }
+  res.send(`Mail: ${mail} Password: ${password}`);
+  } catch (error) {
+    
+  }
+  
+
+
+
 
 }
+
+
+
+
+
+
 
 const logout = async (req, res) => {
 }
