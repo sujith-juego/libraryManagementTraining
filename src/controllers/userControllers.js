@@ -1,22 +1,22 @@
 const userData = require('../json/userJson.json')
 
-// const { v4: uuidv4 } = require('uuid');
-
 const fs = require('fs');             //filesystem library
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+// const { randomUUID } = require('crypto');
+const generateSafeId = require('generate-safe-id')
 const SECRET_KEY = "Library"
 
 const register = async (req, res) => {
   const { user_name, mail, password} = req.body
+
   try {
     //checking if empty
-    if (!user_name || !mail || !password ) {             
+    if (!(user_name && mail && password) ) {             
       return res.json({
         response_message: "PLEASE ENTER ALL THE FIELDS",
         response_status: "400"
       })
     }
-
     //mail validation
     let validEmail = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})$/                                     
     if (!mail.match(validEmail) || (typeof user_name == "number") || (typeof password != "string")) {
@@ -38,33 +38,42 @@ const register = async (req, res) => {
         response_status: "404"
       })
     }
+
+    //return res.json(userData)  //==>working
+
     // if not exist then create new user
-    //   let index = uuidv4();//generating unique id for particular user
-    let index = userData.length + 1
+    // let index = randomUUID()
+    let id = generateSafeId()
+    // return res.json(id)    =>working
+    // let index = userData.length + 1
     const obj = {
-      user_id: index,
+      user_id: id,
       user_name: user_name,
       mail: mail
     }
-    await userData.push(obj);            //adding new user to the json object
-    await fs.writeFile('./json/userJson.json', JSON.stringify(userData, null, 2))
-        return res.json({
-          response_message: "User Registered Successfully",
-          response_status: "200",
-          response_object: obj
-        })
-      }
-    })
-  } catch (error) {
-    console.log(error);
-    return res.json({
-      response_message: "Something went wrong",
-      response_status: "500"
-    })
-  }
+    // return res.json(obj) ===>working
+    userData.push(obj);            //adding new user to the json object
+    // return res.json(userData)==>working
+    // await fs.promises.writeFile('../json/userJson.json', JSON.stringify(userData, null, 2))    //==> err
+    fs.writeFile('../json/userJson.json', JSON.stringify(userData,null,2))
+      return res.json({
+        response_message: "User Registered Successfully",
+        response_status: "200",
+        response_object: obj
+      })
+
+    }catch(error) {
+      console.log(error);
+      return res.json({
+        response_message: "Something went wrong",
+        response_status: "500"
+      })
+    }
+    
 }
+
 const login = async (req, res) => {
-  const { mail, password } = req.body
+  const { mail, password } = req.body()
 
 }
 
