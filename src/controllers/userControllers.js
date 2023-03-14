@@ -101,7 +101,7 @@ const login = async (req, res) => {
     const user = await userData.find((userData) => {
       return userData.mail == mail
     })
-console.log(user)        //==>working
+// console.log(user)        //==>working
     if (!user) {
       return res.json({
         response_message: "User Not Found",
@@ -109,25 +109,27 @@ console.log(user)        //==>working
       })
     }
 
+    // const hashedPassword = await bcrypt.hash(password,10)     //password hashing
+    // console.log(hashedPassword)
+    //  to compare the passwords
+    const bool = await  bcrypt.compare(password,user.hashedPassword)
+    // console.log(bool)
 
-    const hashedPassword = await bcrypt.hash(password,10)     //password hashing
-    console.log(hashedPassword)
-    if (hashedPassword != user.hashedPassword) {
+    if ( bool == false) {
       return res.json({
         response_message: "Invalid password",
         response_status:"412"
       })
-      
-  }
+    } else {
+      return res.json({
+        response_message:"Login Successful",
+        response_status:200
+      })
+    }
   // res.send(`Mail: ${mail} Password: ${password}`);
   } catch (error) {
     res.send(error)
   }
-  
-
-
-
-
 }
 
 
