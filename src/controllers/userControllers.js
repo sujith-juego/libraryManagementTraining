@@ -7,7 +7,7 @@ const { writeFile } = require('fs')
 const bcrypt = require("bcrypt")
 const generateSafeId = require('generate-safe-id')
 const { error } = require('console')
-const SECRET_KEY = "Library"
+const { signAccessToken } = require('../utils/jwtToken')
 
 const register = async (req, res) => {
   const { user_name, mail, user_role, password} = req.body
@@ -115,17 +115,30 @@ const login = async (req, res) => {
     const bool = await  bcrypt.compare(password,user.hashedPassword)
     // console.log(bool)
 
-    if ( bool == false) {
-      return res.json({
-        response_message: "Invalid password",
-        response_status:"412"
-      })
-    } else {
-      return res.json({
-        response_message:"Login Successful",
-        response_status:200
-      })
-    }
+    //  create jwt token = Authorization
+    if (bool) {
+      const accessToken = await signAccessToken(user.mail)
+      // const accessToken = jwt.sign(user, secret)
+    //  send JWT token to frontend requestor
+      res.status(200).send({ accessToken: accessToken })
+      } else {
+        return res.json({
+          response_message: "Invalid password",
+          response_status:"412"
+    })
+  }
+  
+
+
+
+    // } else {
+    //   return res.json({
+    //     response_message:"Login Successful",
+    //     response_status:200
+    //   })
+    // }
+
+
   // res.send(`Mail: ${mail} Password: ${password}`);
   } catch (error) {
     res.send(error)
