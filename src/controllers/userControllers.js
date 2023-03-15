@@ -2,12 +2,12 @@ const userData = require('../json/userJson.json')
 
 const fs = require('fs')             //filesystem library
 const jwt = require('jsonwebtoken')
-const util = require('util')
 const { writeFile } = require('fs')
 const bcrypt = require("bcrypt")
 const generateSafeId = require('generate-safe-id')
-const { error } = require('console')
-const { signAccessToken } = require('../utils/jwtToken')
+const process = require('process')
+const path = '/home/sujithprabhu/Desktop/Project111/libraryManagement/src/json/userJson.json'
+
 
 const register = async (req, res) => {
   const { user_name, mail, user_role, password} = req.body
@@ -49,12 +49,15 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password,10)     //password hashing
     // return res.json(id)    =>working
     // let index = userData.length + 1
+
+
     const obj = {
       user_id: id,
       user_name: user_name,
       mail: mail,
       hashedPassword: hashedPassword,
-      user_role: user_role
+      user_role: user_role,
+      token:null
     }
     // return res.json(obj) ===>working
     userData.push(obj);            //adding new user to the json object
@@ -62,9 +65,14 @@ const register = async (req, res) => {
     const jsonString = JSON.stringify(userData, null, 2)
     // await fs.promises.writeFileSync('../json/userJson.json', jsonString )     
     
-    // fs.writeFile('../json/userJson.json', JSON.stringify(userData,null,2))
-
-      const path = '/home/sujithprabhu/Desktop/Project111/libraryManagement/src/json/userJson.json'
+  //   fs.writeFile('../json/userJson.json', JSON.stringify(userData,null,2),err=>{
+  //     if (err) return err
+  //     return res.json({
+  //       response_message: "User Registered Successfully",
+  //       response_status: "200",
+  //       response_object: obj
+  //   })
+  // })
       writeFile(path, jsonString, (error) => {
         if (error) {
           return res.json({
@@ -76,7 +84,9 @@ const register = async (req, res) => {
         response_message: "User Registered Successfully",
         response_status: "200",
         response_object: obj
+      
       })
+      
     }
     })
     }catch(error) {
@@ -108,38 +118,47 @@ const login = async (req, res) => {
         response_status: "404"
       })
     }
-
-    // const hashedPassword = await bcrypt.hash(password,10)     //password hashing
-    // console.log(hashedPassword)
-    //  to compare the passwords
+    const index = userData.indexOf(user)
+    // console.log(index)
     const bool = await  bcrypt.compare(password,user.hashedPassword)
     // console.log(bool)
 
     //  create jwt token = Authorization
     if (bool) {
-      const accessToken = await signAccessToken(user.mail)
-      // const accessToken = jwt.sign(user, secret)
-    //  send JWT token to frontend requestor
-      res.status(200).send({ accessToken: accessToken })
+
+      //create token
+      const token = await jwt.sign({ mail:mail },
+        process.env.SECRET, {
+        expiresIn: "1h",
+      });
+      // console.log(token)
+      user.token = token
+      // console.log(user) //==>working
+    //   userData.push(obj);            //adding user token to the json object
+    // return res.json(userData) //==>working
+    const jsonString = JSON.stringify(userData, null, 2)
+
+      writeFile(path, jsonString, (error) => {
+        if (error) {
+          return res.json({
+            response_message:`An error has occurred  ${error}`,
+            response_status:"422"
+        })
+      } else {
+        return res
+          .status(200)
+          .json({ message: "User Logged in Successfully", token })      
+      }
+    })
+
+
       } else {
         return res.json({
           response_message: "Invalid password",
           response_status:"412"
     })
-  }
   
-
-
-
-    // } else {
-    //   return res.json({
-    //     response_message:"Login Successful",
-    //     response_status:200
-    //   })
-    // }
-
-
-  // res.send(`Mail: ${mail} Password: ${password}`);
+    }
   } catch (error) {
     res.send(error)
   }
@@ -152,6 +171,33 @@ const login = async (req, res) => {
 
 
 const logout = async (req, res) => {
+  const  mail = req.body.mail
+  try {
+    const user = await userData.find((userData) => {
+      return userData.mail == mail
+    })
+    // console.log(user)        //==>working
+    if(user) {
+      const index = userData.indexOf(user)
+      // console.log(index)
+      userData[index].token = null
+      const jsonString = JSON.stringify(userData, null, 2)
+      writeFile(path, jsonString, (error) => {
+        if (error) {
+          return res.json({
+            response_message:`An error has occurred  ${error}`,
+            response_status:"422"
+        })
+      } else {
+        return res
+          .status(200)
+          .json({ message: "User Logged out Successfully"})      
+      }
+    })
+    }
+  } catch (error) {
+    res.send(error)
+  }  
 }
 
 //exports the function

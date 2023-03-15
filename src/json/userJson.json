@@ -4,21 +4,79 @@
     "user_name": "Ramesh",
     "mail": "ramesh11@gmail.com",
     "hashedPassword": "$2b$10$PYsh0l3yzDkfp3DdashSp.2Dt48I42Cwc7Kb/apxMMf/jDUJo4eUG",
-    "user_role": "student"
+    "user_role": "student",
+    "token": null
   },
   {
     "user_id": "WPF_XBbJEYMzA4efWX3NLw1RRDA9JkUibY5sxU-D",
     "user_name": "sujith",
     "mail": "sujithprabhu38@gmail.com",
     "hashedPassword": "$2b$10$alDwE23wZ8U7poFkQ21ZkOOBDImSmNb/JgaT3c9J7Id.G6Xpb348e",
-    "user_role": "admin"
+    "user_role": "admin",
+    "token": null
   },
   {
     "user_id": "mEvzryNzk8ejC1BUV_ulWSMBpldx8SOVW7P_lXc9",
     "user_name": "ram",
     "mail": "ram535@gmail.com",
     "hashedPassword": "$2b$10$IuPXMOiSOpPTVZsMKr/WGeIZpTXFRQbhBGanOakWfjPyxAL8LSNza",
-    "user_role": "student"
+    "user_role": "student",
+    "token": null
+  },
+  {
+    "user_id": "ss9NUhGfgcesWT55jtn5wmrR7uSNy5g5mOR21sOQ",
+    "user_name": "swasthik",
+    "mail": "swasthik01@gmail.com",
+    "hashedPassword": "$2b$10$Ofh48BwY8iAj7P3N3muFEe/6UazOHdRjLgxad5ShLjFBANbqkNNPO",
+    "user_role": "student",
+    "token": null
+  },
+  {
+    "user_id": "HshEdsnDrJjGKzyP2sKD1MdIOL12qGRmRLB19IAT",
+    "user_name": "tarun",
+    "mail": "tarun019@gmail.com",
+    "hashedPassword": "$2b$10$xQhDhoPwgOh4tQOwVvwGgOpOSjUSFl5epPEgNoM13RgrPwwEutqqO",
+    "user_role": "student",
+    "token": null
+  },
+  {
+    "user_id": "5UhHw7ZPz--t9qNrbmHqO4tsEW4V0JJLHhDD9TA4",
+    "user_name": "charan",
+    "mail": "charan@gmail.com",
+    "hashedPassword": "$2b$10$Re4iJdJwWuFetv9Ze6YS8exZ26cotvjh5Ki.vI4Mp.I4dUBG0P9iS",
+    "user_role": "student",
+    "token": null
+  },
+  {
+    "user_id": "t7Q7xHYlMNxzZ_i0wrzgO8HMVPdvv4QMueEtbult",
+    "user_name": "rajath",
+    "mail": "rajath38@gmail.com",
+    "hashedPassword": "$2b$10$zPNhu99vtJdCBKTyyHVnb.EtCc9oC1DGpuOqoJeu5K2eAkm8w3jIK",
+    "user_role": "student",
+    "token": null
+  },
+  {
+    "user_id": "Jt5m2N3FmoTmXRhm0F6EIGEeHfC30lUWvlTSI8Qt",
+    "user_name": "raman",
+    "mail": "raman@gmail.com",
+    "hashedPassword": "$2b$10$Zw0YG/1MoX0Y1uLqh3wRRObLLUQBaabFr3b3ewIR11Uj90x0gXRGy",
+    "user_role": "student",
+    "token": null
+  },
+  {
+    "user_id": "ZooP9_8oc6BTz18HJ5seEXi_GLg9IyuWI3UYUUXc",
+    "user_name": "srujan",
+    "mail": "srijan@gmail.com",
+    "hashedPassword": "$2b$10$Bd2R.FwjbRJlo5ZQ9iw4m.wVd953bGSKX27jZ/bDM0xHQSnFqGkXG",
+    "user_role": "student",
+    "token": null
+  },
+  {
+    "user_id": "gzxhlflgKjdzlIKJT0g3tkQYa2RxsJbay6CKwr-A",
+    "user_name": "Rajan",
+    "mail": "rajan@gmail.com",
+    "hashedPassword": "$2b$10$.80qn3SSwUV/GM2sDrh0Oe.wA43pMVU/ePoP0vQtK.8HalbsQ8kle",
+    "user_role": "student",
+    "token": null
   }
 ]
-
