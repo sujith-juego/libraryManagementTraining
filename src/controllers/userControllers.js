@@ -10,7 +10,7 @@ const path = '/home/sujithprabhu/Desktop/Project111/libraryManagement/src/json/u
 
 
 const register = async (req, res) => {
-  const { user_name, mail, user_role, password} = req.body
+  const { user_name, mail, password} = req.body
 
   try {
     //checking if empty
@@ -56,7 +56,7 @@ const register = async (req, res) => {
       user_name: user_name,
       mail: mail,
       hashedPassword: hashedPassword,
-      user_role: user_role,
+      user_role: 'student',
       token:null
     }
     // return res.json(obj) ===>working
