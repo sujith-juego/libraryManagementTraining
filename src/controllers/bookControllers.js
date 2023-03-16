@@ -8,7 +8,6 @@ const { writeFile } = require('fs')
 const bookData = require('../json/bookJson.json')
 const userData = require('../json/userJson.json')
 // console.log(bookData)
-const Books = bookData
 
 function isTokenExpired(token) {
     const payloadBase64 = token.split('.')[1];
@@ -21,10 +20,12 @@ function isTokenExpired(token) {
 
 const viewAllBook = async (req, res) => {
     const {token ,book_id, author, category, status} = req.body
+    const category1 = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()   //category ==> category1
+    const author1 = author.toUpperCase()
     // console.log(token)
     // console.log(author)
     // console.log(book_id)
-    // console.log(category)
+    // console.log(category1)
     // console.log(status)
     // console.log(bookData)
     // console.log(userData)
@@ -85,12 +86,12 @@ const viewAllBook = async (req, res) => {
                     })
                 }
             }
-            // when author is given ==> working
+            // when author1 is given ==> working
             else if (book_id === undefined && category === undefined && status === undefined) {
                 // console.log(author)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return bookData.author == author
+                        return bookData.author == author1
                     })
                 if (!book) {
                     return res.json({
@@ -106,12 +107,12 @@ const viewAllBook = async (req, res) => {
                     })
                 }
             }
-            // when category is given ==> working
+            // when category1 is given ==> working
             else if (book_id === undefined && author === undefined && status === undefined) {
                 // console.log(category)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return bookData.category == category
+                        return bookData.category == category1
                     })
                 if (!book) {
                     return res.json({
@@ -149,13 +150,13 @@ const viewAllBook = async (req, res) => {
                 }
             }
         //when any 2 parameters are given
-            //when book_id and category is given
+            //when book_id and category1 is given
             else if(author === undefined && status == undefined){
                 // console.log(book_id)
-                //console.log(category)
+                //console.log(category1)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.book_id == book_id && bookData.category == category)
+                        return (bookData.book_id == book_id && bookData.category == category1)
                     })
                 if (!book) {
                     return res.json({
@@ -174,10 +175,10 @@ const viewAllBook = async (req, res) => {
             //when book_id and author is given
             else if(category === undefined && status == undefined){
                 // console.log(book_id)
-                //console.log(category)
+                //console.log(author)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.book_id == book_id && bookData.author == author)
+                        return (bookData.book_id == book_id && bookData.author == author1)
                     })
                 if (!book) {
                     return res.json({
@@ -217,11 +218,11 @@ const viewAllBook = async (req, res) => {
             }
             //when author and category is given
             else if(book_id == undefined && status == undefined){
-                // console.log(author)
+                // console.log(author1)
                 //console.log(category)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.author == author && bookData.category == category)
+                        return (bookData.author == author1 && bookData.category == category1)
                     })
                 if (!book) {
                     return res.json({
@@ -239,11 +240,11 @@ const viewAllBook = async (req, res) => {
             }
             //when author and status is given
             else if(book_id == undefined && category == undefined){
-                // console.log(author)
+                // console.log(author1)
                 //console.log(status)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.author == author && bookData.status == status)
+                        return (bookData.author == author1 && bookData.status == status)
                     })
                 if (!book) {
                     return res.json({
@@ -265,7 +266,7 @@ const viewAllBook = async (req, res) => {
                 //console.log(category)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.status == status && bookData.category == category)
+                        return (bookData.status == status && bookData.category == category1)
                     })
                 if (!book) {
                     return res.json({
@@ -289,7 +290,7 @@ const viewAllBook = async (req, res) => {
                 // console.log(category)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.book_id == book_id && bookData.author == author && bookData.category == category)
+                        return (bookData.book_id == book_id && bookData.author == author1 && bookData.category == category1)
                     })
                 if (!book) {
                     return res.json({
@@ -312,7 +313,7 @@ const viewAllBook = async (req, res) => {
                 // console.log(status)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.book_id == book_id && bookData.author == author && bookData.status == status)
+                        return (bookData.book_id == book_id && bookData.author == author1 && bookData.status == status)
                     })
                 if (!book) {
                     return res.json({
@@ -335,7 +336,7 @@ const viewAllBook = async (req, res) => {
                 // console.log(category)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.book_id == book_id && bookData.status == status && bookData.category == category)
+                        return (bookData.book_id == book_id && bookData.status == status && bookData.category == category1)
                     })
                 if (!book) {
                     return res.json({
@@ -358,7 +359,7 @@ const viewAllBook = async (req, res) => {
                 // console.log(author)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.category == category && bookData.status == status && bookData.author == author)
+                        return (bookData.category == category1 && bookData.status == status && bookData.author == author1)
                     })
                 if (!book) {
                     return res.json({
@@ -382,7 +383,7 @@ const viewAllBook = async (req, res) => {
                 // console.log(category)
                 const book = await bookData.filter(
                     (bookData) => {
-                        return (bookData.book_id == book_id && bookData.author == author && bookData.status == status && bookData.category == category)
+                        return (bookData.book_id == book_id && bookData.author == author1 && bookData.status == status && bookData.category == category1)
                     })
                 if (!book) {
                     return res.json({
