@@ -129,7 +129,7 @@ const login = async (req, res) => {
       //create token
       const token = await jwt.sign({ mail:mail },
         process.env.SECRET, {
-        expiresIn: "1h",
+        expiresIn: '1h',
       });
       // console.log(token)
       user.token = token
