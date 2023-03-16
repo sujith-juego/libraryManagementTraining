@@ -14,7 +14,7 @@ const register = async (req, res) => {
 
   try {
     //checking if empty
-    if (!(user_name && mail && password && user_role) ) {             
+    if (!(user_name && mail && password) ) {             
       return res.json({
         response_message: "PLEASE ENTER ALL THE FIELDS",
         response_status: "400"
@@ -22,7 +22,7 @@ const register = async (req, res) => {
     }
     //mail validation
     let validEmail = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})$/                                     
-    if (!mail.match(validEmail) || (typeof user_name == "number") || (typeof password != "string") || (typeof user_role != "string")) {
+    if (!mail.match(validEmail) || (typeof user_name == "number") || (typeof password != "string")) {
       return res.json({
         response_message: "Invalid credentials",
         response_status: "401"
