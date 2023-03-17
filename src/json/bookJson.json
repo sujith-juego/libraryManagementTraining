@@ -1,18 +1,82 @@
 [
-    {
-        "book_id": "101",
-        "book_name": "MALGIDI DAYS" ,
-        "author": "R.K" ,
-        "category": "Novel" ,
-        "status": "1" ,
-        "added_By": "001"
-    },
-    {
-        "book_id": "102",
-        "book_name": "THE PRIVATE LIFE OF AN INDIAN PRINCE" ,
-        "author": "MULK RAJ ANAND" ,
-        "category": "Novel" ,
-        "status": "1" ,
-        "added_By": "001"
-    }
+  {
+    "book_id": "101",
+    "book_name": "MALGIDI DAYS",
+    "author": "R.K",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "001"
+  },
+  {
+    "book_id": "102",
+    "book_name": "THE PRIVATE LIFE OF AN INDIAN PRINCE",
+    "author": "MULK RAJ ANAND",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "001"
+  },
+  {
+    "book_id": 1111,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 1111,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 1111,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 1111,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 1111,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 8,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 9,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 10,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  }
 ]

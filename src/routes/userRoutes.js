@@ -5,11 +5,11 @@ const { register, login, logout } = require('../controllers/userControllers')
 
 const userRoutes = express.Router()
 
-userRoutes.post("/register",register)      //register for new user
+userRoutes.post("/register", register)      //register for new user
 
-userRoutes.post("/login",login)             //login for existing user
+userRoutes.post("/login", login)             //login for existing user
 
-userRoutes.post('/logout',logout)               //logout
+userRoutes.post('/logout', logout)               //logout
 
 
 module.exports = userRoutes;      //exporting the user

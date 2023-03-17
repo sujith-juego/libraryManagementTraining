@@ -13,7 +13,7 @@
     "mail": "sujithprabhu38@gmail.com",
     "hashedPassword": "$2b$10$alDwE23wZ8U7poFkQ21ZkOOBDImSmNb/JgaT3c9J7Id.G6Xpb348e",
     "user_role": "admin",
-    "token": null
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoic3VqaXRocHJhYmh1MzhAZ21haWwuY29tIiwiaWF0IjoxNjc5MDM0NDk2LCJleHAiOjE2NzkwMzgwOTZ9.cNKgbr5sKgIHOSS5vzOELfni5ouwFOhmZdLKkIqipe4"
   },
   {
     "user_id": "mEvzryNzk8ejC1BUV_ulWSMBpldx8SOVW7P_lXc9",
@@ -53,7 +53,7 @@
     "mail": "rajath38@gmail.com",
     "hashedPassword": "$2b$10$zPNhu99vtJdCBKTyyHVnb.EtCc9oC1DGpuOqoJeu5K2eAkm8w3jIK",
     "user_role": "student",
-    "token": null
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoicmFqYXRoMzhAZ21haWwuY29tIiwiaWF0IjoxNjc5MDMwNTU0LCJleHAiOjE2NzkwMzQxNTR9.-bky4g0MEVhqr9gyZdJ7YQKO0BCeqZD31ka54K7f-cI"
   },
   {
     "user_id": "Jt5m2N3FmoTmXRhm0F6EIGEeHfC30lUWvlTSI8Qt",
