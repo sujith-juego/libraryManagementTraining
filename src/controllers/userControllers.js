@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt")
 const generateSafeId = require('generate-safe-id')
 const process = require('process')
 const { cwd } = require('process')
+const { token } = require('morgan')
 const path = process.cwd() + "/src/json/userJson.json"
 
 
@@ -58,7 +59,8 @@ const register = async (req, res) => {
       mail: mail,
       hashedPassword: hashedPassword,
       user_role: 'student',
-      token: null
+      token: null,
+      borrowed_books:[]
     }
     // return res.json(obj) ===>working
     userData.push(obj);            //adding new user to the json object
@@ -169,10 +171,10 @@ const login = async (req, res) => {
 
 // Logout method
 const logout = async (req, res) => {
-  const mail = req.body.mail
+  const token = req.body.token
   try {
     const user = await userData.find((userData) => {
-      return userData.mail == mail
+      return userData.token == token
     })
     // console.log(user)        //==>working
     if (!(user.token == null)) {

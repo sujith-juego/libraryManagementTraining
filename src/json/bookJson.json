@@ -78,5 +78,61 @@
     "category": "Novel",
     "status": "1",
     "added_by": "sujith"
+  },
+  {
+    "book_id": 11,
+    "book_name": "THE WHITE TIGER",
+    "author": "ARAVIND ADIGA",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 12,
+    "book_name": "THE WHITE TIGER",
+    "author": "ARAVIND ADIGA",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 13,
+    "book_name": "THE WHITE TIGER",
+    "author": "ARAVIND ADIGA",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 14,
+    "book_name": "THE WHITE TIGER",
+    "author": "ARAVIND ADIGA",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 15,
+    "book_name": "THE WHITE TIGER",
+    "author": "ARAVIND ADIGA",
+    "category": "Novel",
+    "status": "2",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 16,
+    "book_name": "THE WHITE TIGER",
+    "author": "ARAVIND ADIGA",
+    "category": "Novel",
+    "status": "2",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 17,
+    "book_name": "THE WHITE TIGER",
+    "author": "ARAVIND ADIGA",
+    "category": "Novel",
+    "status": "1",
+    "added_by": "sujith"
   }
 ]

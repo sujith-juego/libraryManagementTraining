@@ -1,6 +1,6 @@
 const express = require('express')               //importing express
 
-const { viewAllBook , createBook } = require('../controllers/bookControllers')
+const { viewAllBook , createBook , issueBook } = require('../controllers/bookControllers')
 
 const bookRoutes = express.Router()
 
@@ -10,7 +10,7 @@ bookRoutes.post("/createBook", createBook)      //Adding new book to library ==>
 
 bookRoutes.post("/viewAllBook", viewAllBook)             //display all book details
 
-// bookRoutes.post("/issueBook",issueBook)               //to issue abook to user
+bookRoutes.post("/issueBook",issueBook)               //to issue abook to user
 
 // bookRoutes.post("/returnBook",returnBook)           //to return book
 
