@@ -2,12 +2,16 @@ const fs = require('fs')
 const jwt = require('jsonwebtoken')
 const process = require('process')
 
+// Importing date-and-time module
+const date = require('date-and-time')
+
 const { writeFile } = require('fs')
 
 const auth = require('../middlewares/auth')
 const bookData = require('../json/bookJson.json')
 const userData = require('../json/userJson.json')
 const { async } = require('rxjs')
+const { error } = require('console')
 const bookPath = process.cwd() + "/src/json/bookJson.json"
 const userPath = process.cwd() + "/src/json/userJson.json"
 
@@ -21,6 +25,25 @@ function isTokenExpired(token) {
     const expired = (Date.now() >= exp * 1000)
     return expired
 }
+
+//formatted date
+function format(inputDate) {
+    let date, month, year;
+    date = inputDate.getDate();
+    month = inputDate.getMonth() + 1;
+    year = inputDate.getFullYear();
+
+    date = date
+        .toString()
+        .padStart(2, '0');
+
+    month = month
+        .toString()
+        .padStart(2, '0');
+
+    return `${month}/${date}/${year}`;
+}
+
 
 // To display books by 4 various parameters
 const viewAllBook = async (req, res) => {
@@ -479,82 +502,81 @@ const issueBook = async (req, res) => {
         }
     }
     if (user && book) {
-        if (book.status == "2") {   //checking for availability
-            return res.json({
-                response_message: "Book is currently unavailable.",
-                response_status: "427"
-            })
-        } else {
-            //add book status ==>1
-            // userdata -> add book details he has borrowed
-            const Uindex = userData.indexOf(user)
-            const Bindex = bookData.indexOf(book)
-            // console.log(Uindex)
-            // console.log(Bindex)
-            // const due_day = Date.now()+required_days
-            if (required_days === undefined) {
-                due_day = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000)
-                ub_obj = {
-                    book_id: book.book_id,
-                    required_days: 15,
-                    due_day: due_day,
-                    return_day: null
-                }
-            } else {
-                due_day = new Date(Date.now() + required_days * 24 * 60 * 60 * 1000)
-                ub_obj = {
-                    book_id: book.book_id,
-                    required_days: required_days,
-                    due_day: due_day,
-                    return_day: null
-                }
+        //add book status ==>2
+        // userdata -> add book details he has borrowed
+        const Uindex = userData.indexOf(user)
+        const Bindex = bookData.indexOf(book)
+        // console.log(Uindex)
+        // console.log(Bindex)
+        // const due_day = Date.now()+required_days
+        if (required_days === undefined) {
+            due = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000)
+            due_day = format(due)
+            issued = new Date(Date.now())
+            ub_obj = {
+                book_id: book.book_id,
+                issued_date: format(issued),
+                required_days: 15,
+                due_day: due_day,
+                return_day: null
             }
-            // console.log(due_day)
-            // console.log(ub_obj)
-            // console.log(userData[Uindex])
-            const borrow_index = user['borrowed_books'].length
-            // console.log(borrow_index)
-            const borrow = borrow_index + 1
-            user['borrowed_books'].push(ub_obj);
-            // console.log(user['borrowed_books'])
-            // console.log(userData[Uindex])
-            // Object.assign(userData[Uindex][1], { borrowed_books: ub_obj });
-            // console.log(userData[Uindex])
-            const userjsonString = JSON.stringify(userData, null, 2)
-            console.log(userjsonString)
-            writeFile(userPath, userjsonString, (error) => {
-                if (error) {
-                    return res.json({
-                        response_message: `An error has occurred`,
-                        response_status: "422"
-                    })
-                } else {
-                    return res
-                        .status(202)
-                        .json({
-                            response_message: "User issued with a book successfully",
-                            response_status: "200"
-                        })
-                }
-            })
-            bookData[Bindex].status = "2"
-            const jsonString = JSON.stringify(bookData, null, 2)
-            writeFile(bookPath, jsonString, (error) => {
-                if (error) {
-                    return res.json({
-                        response_message: `An error has occurred`,
-                        response_status: "422"
-                    })
-                }
-                else {
-                    return res.json({
-                        response_message: "Book Issued Successfully",
-                        response_status: "200",
-                        response_object: book
-                    })
-                }
-            })
+        } else {
+            due = new Date(Date.now() + required_days * 24 * 60 * 60 * 1000)
+            due_day = format(due)
+            issued = new Date(Date.now())
+            ub_obj = {
+                book_id: book.book_id,
+                issued_date: format(issued),
+                required_days: required_days,
+                due_day: due_day,
+                return_day: null
+            }
         }
+        // console.log(due_day)
+        // console.log(ub_obj)
+        // console.log(userData[Uindex])
+        // const borrow_index = user['borrowed_books'].length
+        // // console.log(borrow_index)
+        // const borrow = borrow_index + 1
+        user['borrowed_books'].push(ub_obj);
+        // console.log(user['borrowed_books'])
+        // console.log(userData[Uindex])
+        // Object.assign(userData[Uindex][1], { borrowed_books: ub_obj });
+        // console.log(userData[Uindex])
+        const userjsonString = JSON.stringify(userData, null, 2)
+        // console.log(userjsonString)
+        writeFile(userPath, userjsonString, (error) => {
+            if (error) {
+                return res.json({
+                    response_message: `An error has occurred`,
+                    response_status: "422"
+                })
+            } else {
+                return res
+                    .status(202)
+                    .json({
+                        response_message: "User issued with a book successfully",
+                        response_status: "200"
+                    })
+            }
+        })
+        bookData[Bindex].status = "2"
+        const jsonString = JSON.stringify(bookData, null, 2)
+        writeFile(bookPath, jsonString, (error) => {
+            if (error) {
+                return res.json({
+                    response_message: `An error has occurred`,
+                    response_status: "422"
+                })
+            }
+            else {
+                return res.json({
+                    response_message: "Book Issued Successfully",
+                    response_status: "200",
+                    response_object: book
+                })
+            }
+        })
     }
     else {
         return res.json({
@@ -564,9 +586,9 @@ const issueBook = async (req, res) => {
     }
 }
 
-
+// To view the borrowed books
 const displayBorrowedBook = async (req, res) => {
-    const {token} = req.body
+    const { token } = req.body
     if (token === undefined) {
         return res.json({
             response_message: "Please login to your account",
@@ -605,9 +627,129 @@ const displayBorrowedBook = async (req, res) => {
     }
 }
 
+//To return the book
+const returnBook = async (req, res) => {
+    const { token, book_id } = req.body
+    if (token === undefined) {
+        return res.json({
+            response_message: "Please login to your account",
+            response_status: "426"
+        })
+    }
+    if (book_id === undefined) {
+        return res.json({
+            response_message: "Please do provide the book id",
+            response_status: "428"
+        })
+    }
+    const user = await userData.find(
+        (userData) => {
+            return userData.token == token
+        })
+    const book = await bookData.find(
+        (bookData) => {
+            return bookData.book_id == book_id
+        })
+    if (user) {
+        //Validating token
+        const expire = isTokenExpired(token)
+        // console.log(expire)
+        if (expire) {
+            // login expired
+            return res.json({
+                response_message: "Session Expired, Login Again",
+                response_status: "425"
+            })
+        }
+    }
+    if (book) {
+        // Book return will be done here
+        if (book.status == "1") {   //checking for returned already or not
+            return res.json({
+                response_message: "Book is returned already",
+                response_status: "427"
+            })
+        }
+    }
+    if (user && book) {
+        //add book status ==>1
+        // userdata -> add book details he has returned
+        const Uindex = userData.indexOf(user)
+        const Bindex = bookData.indexOf(book)
+        // console.log(Uindex)
+        // console.log(Bindex)
+        const returnd = new Date(Date.now())
+        const return_day = format(returnd)
+        // const diffInMs   = new Date(return_day) - new Date(book.issued_date)
+        // const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
+        // const moment = require('moment');
+        // const diffInDays = moment(returnd).diff(moment(book.due_day), 'days');
+        // console.log(diffInDays)
+        // const delay = date.subtract( return_day, book.due_day ).toDays()
+        // console.log(delay)
+
+
+        const borrow = user['borrowed_books']
+        // console.log(borrow)
+        const bbook = await borrow.find(
+            (borrow) => {
+                return borrow.book_id == book_id
+            })
+        // console.log(bbook)
+        const bbindex = borrow.indexOf(bbook)
+        // console.log(bbindex)
+        const delay = date.subtract(new Date(return_day), new Date(bbook.due_day)).toDays()
+        // console.log(delay)
+
+        ub_obj = {
+            book_id: book_id,
+            issued_date: bbook.issued_date,
+            required_days: bbook.required_days,
+            due_day: bbook.due_day,
+            return_day: return_day,
+            delay_days: delay
+        }
+        // bbook = ub_obj
+        user['borrowed_books'][bbindex] = ub_obj
+        const userjsonString = JSON.stringify(userData, null, 2)
+        writeFile(userPath, userjsonString, (error) => {
+            if (error) {
+                return res.json({
+                    response_message: `An error has occurred`,
+                    response_status: "422"
+                })
+            } else {
+                return res.json({
+                    response_message: `Book Returned Successfully with a delay of ${delay}`,
+                    response_status: "200"
+                })
+            }
+        })
+        bookData[Bindex].status = "1"
+        const jsonString = JSON.stringify(bookData, null, 2)
+        writeFile(bookPath, jsonString, (error) => {
+            if (error) {
+                return res.json({
+                    response_message: `An error has occurred`,
+                    response_status: "422"
+                })
+            } else {
+                return res.json({
+                    response_message: `Book Returned Successfully`,
+                    response_status: "200",
+                    response_object: book
+                })
+            }
+        })
+    } else {
+        return res.json({
+            response_message: "Something went wrong",
+            response_status: "403"
+        })
+    }
+}
 
 
 
 
-
-module.exports = { viewAllBook, createBook, issueBook, displayBorrowedBook }
+module.exports = { viewAllBook, createBook, issueBook, displayBorrowedBook, returnBook }

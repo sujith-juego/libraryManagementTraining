@@ -5,7 +5,8 @@
     "mail": "ramesh11@gmail.com",
     "hashedPassword": "$2b$10$PYsh0l3yzDkfp3DdashSp.2Dt48I42Cwc7Kb/apxMMf/jDUJo4eUG",
     "user_role": "student",
-    "token": null
+    "token": null,
+    "borrowed_books": []
   },
   {
     "user_id": "WPF_XBbJEYMzA4efWX3NLw1RRDA9JkUibY5sxU-D",
@@ -14,14 +15,7 @@
     "hashedPassword": "$2b$10$alDwE23wZ8U7poFkQ21ZkOOBDImSmNb/JgaT3c9J7Id.G6Xpb348e",
     "user_role": "admin",
     "token": null,
-    "borrowed_books": [
-      {
-        "book_id": 16,
-        "required_days": "15",
-        "due_day": "2023-04-01T10:24:56.808Z",
-        "return_day": null
-      }
-    ]
+    "borrowed_books": []
   },
   {
     "user_id": "mEvzryNzk8ejC1BUV_ulWSMBpldx8SOVW7P_lXc9",
@@ -29,7 +23,8 @@
     "mail": "ram535@gmail.com",
     "hashedPassword": "$2b$10$IuPXMOiSOpPTVZsMKr/WGeIZpTXFRQbhBGanOakWfjPyxAL8LSNza",
     "user_role": "student",
-    "token": null
+    "token": null,
+    "borrowed_books": []
   },
   {
     "user_id": "ss9NUhGfgcesWT55jtn5wmrR7uSNy5g5mOR21sOQ",
@@ -37,7 +32,8 @@
     "mail": "swasthik01@gmail.com",
     "hashedPassword": "$2b$10$Ofh48BwY8iAj7P3N3muFEe/6UazOHdRjLgxad5ShLjFBANbqkNNPO",
     "user_role": "student",
-    "token": null
+    "token": null,
+    "borrowed_books": []
   },
   {
     "user_id": "HshEdsnDrJjGKzyP2sKD1MdIOL12qGRmRLB19IAT",
@@ -45,7 +41,8 @@
     "mail": "tarun019@gmail.com",
     "hashedPassword": "$2b$10$xQhDhoPwgOh4tQOwVvwGgOpOSjUSFl5epPEgNoM13RgrPwwEutqqO",
     "user_role": "student",
-    "token": null
+    "token": null,
+    "borrowed_books": []
   },
   {
     "user_id": "5UhHw7ZPz--t9qNrbmHqO4tsEW4V0JJLHhDD9TA4",
@@ -53,7 +50,8 @@
     "mail": "charan@gmail.com",
     "hashedPassword": "$2b$10$Re4iJdJwWuFetv9Ze6YS8exZ26cotvjh5Ki.vI4Mp.I4dUBG0P9iS",
     "user_role": "student",
-    "token": null
+    "token": null,
+    "borrowed_books": []
   },
   {
     "user_id": "t7Q7xHYlMNxzZ_i0wrzgO8HMVPdvv4QMueEtbult",
@@ -61,24 +59,28 @@
     "mail": "rajath38@gmail.com",
     "hashedPassword": "$2b$10$zPNhu99vtJdCBKTyyHVnb.EtCc9oC1DGpuOqoJeu5K2eAkm8w3jIK",
     "user_role": "student",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoicmFqYXRoMzhAZ21haWwuY29tIiwiaWF0IjoxNjc5Mjk0MzY5LCJleHAiOjE2NzkyOTc5Njl9.s3AekXwnY8q52v8i82JHjIMRhtC2xaMQdqVupSo88sA",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoicmFqYXRoMzhAZ21haWwuY29tIiwiaWF0IjoxNjc5MzA1ODk3LCJleHAiOjE2NzkzMDk0OTd9.c23h_vJ722SCrlYrc9ty8_aLBl_seyzXg4GBxJMyL1A",
     "borrowed_books": [
       {
-        "book_id": 16,
+        "book_id": "10",
+        "issued_date": "03/02/2023",
         "required_days": 15,
-        "due_day": "2023-04-04T05:21:39.722Z",
+        "due_day": "03/17/2023",
+        "return_day": "03/20/2023",
+        "delay_days": 3
+      },
+      {
+        "book_id": 5,
+        "issued_date": "03/20/2023",
+        "required_days": 15,
+        "due_day": "04/04/2023",
         "return_day": null
       },
       {
-        "book_id": 16,
+        "book_id": 3,
+        "issued_date": "03/20/2023",
         "required_days": 15,
-        "due_day": "2023-04-04T05:25:20.883Z",
-        "return_day": null
-      },
-      {
-        "book_id": 15,
-        "required_days": 15,
-        "due_day": "2023-04-04T05:26:36.577Z",
+        "due_day": "04/04/2023",
         "return_day": null
       }
     ]
@@ -89,7 +91,8 @@
     "mail": "raman@gmail.com",
     "hashedPassword": "$2b$10$Zw0YG/1MoX0Y1uLqh3wRRObLLUQBaabFr3b3ewIR11Uj90x0gXRGy",
     "user_role": "student",
-    "token": null
+    "token": null,
+    "borrowed_books": []
   },
   {
     "user_id": "ZooP9_8oc6BTz18HJ5seEXi_GLg9IyuWI3UYUUXc",
@@ -97,7 +100,8 @@
     "mail": "srijan@gmail.com",
     "hashedPassword": "$2b$10$Bd2R.FwjbRJlo5ZQ9iw4m.wVd953bGSKX27jZ/bDM0xHQSnFqGkXG",
     "user_role": "student",
-    "token": null
+    "token": null,
+    "borrowed_books": []
   },
   {
     "user_id": "gzxhlflgKjdzlIKJT0g3tkQYa2RxsJbay6CKwr-A",
@@ -105,6 +109,7 @@
     "mail": "rajan@gmail.com",
     "hashedPassword": "$2b$10$.80qn3SSwUV/GM2sDrh0Oe.wA43pMVU/ePoP0vQtK.8HalbsQ8kle",
     "user_role": "student",
-    "token": null
+    "token": null,
+    "borrowed_books": []
   }
 ]

@@ -1,6 +1,6 @@
 [
   {
-    "book_id": "101",
+    "book_id": 1,
     "book_name": "MALGIDI DAYS",
     "author": "R.K",
     "category": "Novel",
@@ -8,7 +8,7 @@
     "added_by": "001"
   },
   {
-    "book_id": "102",
+    "book_id": 2,
     "book_name": "THE PRIVATE LIFE OF AN INDIAN PRINCE",
     "author": "MULK RAJ ANAND",
     "category": "Novel",
@@ -16,7 +16,15 @@
     "added_by": "001"
   },
   {
-    "book_id": 1111,
+    "book_id": 3,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "2",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 4,
     "book_name": "THE GOD OF SMALL THINGS",
     "author": "ARUNDHATI ROY",
     "category": "Novel",
@@ -24,7 +32,15 @@
     "added_by": "sujith"
   },
   {
-    "book_id": 1111,
+    "book_id": 5,
+    "book_name": "THE GOD OF SMALL THINGS",
+    "author": "ARUNDHATI ROY",
+    "category": "Novel",
+    "status": "2",
+    "added_by": "sujith"
+  },
+  {
+    "book_id": 6,
     "book_name": "THE GOD OF SMALL THINGS",
     "author": "ARUNDHATI ROY",
     "category": "Novel",
@@ -32,23 +48,7 @@
     "added_by": "sujith"
   },
   {
-    "book_id": 1111,
-    "book_name": "THE GOD OF SMALL THINGS",
-    "author": "ARUNDHATI ROY",
-    "category": "Novel",
-    "status": "1",
-    "added_by": "sujith"
-  },
-  {
-    "book_id": 1111,
-    "book_name": "THE GOD OF SMALL THINGS",
-    "author": "ARUNDHATI ROY",
-    "category": "Novel",
-    "status": "1",
-    "added_by": "sujith"
-  },
-  {
-    "book_id": 1111,
+    "book_id": 7,
     "book_name": "THE GOD OF SMALL THINGS",
     "author": "ARUNDHATI ROY",
     "category": "Novel",
@@ -116,7 +116,7 @@
     "book_name": "THE WHITE TIGER",
     "author": "ARAVIND ADIGA",
     "category": "Novel",
-    "status": "2",
+    "status": "1",
     "added_by": "sujith"
   },
   {
@@ -124,7 +124,7 @@
     "book_name": "THE WHITE TIGER",
     "author": "ARAVIND ADIGA",
     "category": "Novel",
-    "status": "2",
+    "status": "1",
     "added_by": "sujith"
   },
   {
