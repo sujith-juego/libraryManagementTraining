@@ -7,6 +7,7 @@ const { writeFile } = require('fs')
 const auth = require('../middlewares/auth')
 const bookData = require('../json/bookJson.json')
 const userData = require('../json/userJson.json')
+const { async } = require('rxjs')
 const bookPath = process.cwd() + "/src/json/bookJson.json"
 const userPath = process.cwd() + "/src/json/userJson.json"
 
@@ -564,6 +565,49 @@ const issueBook = async (req, res) => {
 }
 
 
+const displayBorrowedBook = async (req, res) => {
+    const {token} = req.body
+    if (token === undefined) {
+        return res.json({
+            response_message: "Please login to your account",
+            response_status: "426"
+        })
+    }
+    const user = await userData.find(
+        (userData) => {
+            return userData.token == token
+        })
+    // console.log(user)
+    if (user) {
+        const expire = isTokenExpired(token)
+        // console.log(expire)
+        if (expire) {
+            // login expired
+            return res.json({
+                response_message: "Session Expired, Login Again",
+                response_status: "425"
+            })
+        } else {
+            const books = await user['borrowed_books']
+            return res.json({
+                response_message: "Borrowed book details",
+                response_status: '200',
+                response_object: books
+            })
+        }
+    }
+    else {
+        return res.json({
+            response_message: "Access Denied",
+            response_status: "403"
+        })
+
+    }
+}
 
 
-module.exports = { viewAllBook, createBook, issueBook }
+
+
+
+
+module.exports = { viewAllBook, createBook, issueBook, displayBorrowedBook }
