@@ -10,6 +10,15 @@ const { cwd } = require('process')
 const { token } = require('morgan')
 const path = process.cwd() + "/src/json/userJson.json"
 
+function isTokenExpired(token) {
+  const payloadBase64 = token.split('.')[1];
+  const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
+  const decoded = JSON.parse(decodedJson)
+  const exp = decoded.exp;
+  const expired = (Date.now() >= exp * 1000)
+  return expired
+}
+
 
 const register = async (req, res) => {
   const { user_name, mail, password } = req.body
@@ -60,7 +69,7 @@ const register = async (req, res) => {
       hashedPassword: hashedPassword,
       user_role: 'student',
       token: null,
-      borrowed_books:[]
+      borrowed_books: []
     }
     // return res.json(obj) ===>working
     userData.push(obj);            //adding new user to the json object
@@ -93,7 +102,7 @@ const register = async (req, res) => {
       }
     })
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.json({
       response_message: "Something went wrong",
       response_status: "500"
@@ -163,10 +172,14 @@ const login = async (req, res) => {
 
     }
   } catch (error) {
-    res.send(error)
+    {
+      return res.json({
+        response_message: "Something went wrong",
+        response_status: "500"
+      })
+    }
   }
 }
-
 
 
 // Logout method
@@ -200,11 +213,79 @@ const logout = async (req, res) => {
       response_status: "423"
     })
   } catch (error) {
-    res.send(error)
+    return res.json({
+      response_message: "Something went wrong",
+      response_status: "500"
+    })
   }
 }
 
+//to update the password
+const updatePassword = async (req, res) => {
+  const { token, old_password, new_password } = req.body
+  try {
+    if (token === undefined || old_password === undefined || new_password === undefined) {
+      return res.json({
+        response_message: "PLEASE ENTER ALL THE FIELDS",
+        response_status: "400"
+      })
+    } else {
+      if(old_password == new_password){
+        return res.json({
+          response_message: "New password cannot be same as old password",
+          response_status: "412"
+        })
+      }
+      const user = await userData.find((userData) => {
+        return userData.token == token
+      })
+      // console.log(user)
+      const expire = isTokenExpired(token)    //checking for token expiration
+      if (expire) {
+        return res.json({
+          response_message: "Session Expired",
+          response_status: "401"
+        })
+      } else {
+        const bool = await bcrypt.compare(old_password, user.hashedPassword)
+        if (bool) {
+          const hashedPassword = await bcrypt.hash(new_password, 10)
+          user.hashedPassword = hashedPassword
+          const jsonString = JSON.stringify(userData, null, 2)
+          writeFile(path, jsonString, (error) => {
+            if (error) {
+              return res.json({
+                response_message: `An error has occurred  ${error}`,
+                response_status: "422"
+              })
+            } else {
+              return res.json({
+                response_message: "Password Updated Successfully",
+                response_status: "200"
+              })
+            }
+          })
+        } else {
+          return res.json({
+            response_message: "Invalid password",
+            response_status: "412"
+          })
+        }
+      }
+    }
+  } catch (error) {
+    return res.json({
+      response_message: "Something went wrong",
+      response_status: "500"
+    })
+  }
+}
+
+
+
+
+
 //exports the function
-module.exports = { register, login, logout }
+module.exports = { register, login, logout, updatePassword }
 
 

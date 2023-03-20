@@ -57,9 +57,9 @@
     "user_id": "t7Q7xHYlMNxzZ_i0wrzgO8HMVPdvv4QMueEtbult",
     "user_name": "rajath",
     "mail": "rajath38@gmail.com",
-    "hashedPassword": "$2b$10$zPNhu99vtJdCBKTyyHVnb.EtCc9oC1DGpuOqoJeu5K2eAkm8w3jIK",
+    "hashedPassword": "$2b$10$ezmotjZ0yOgsqhNZuMaTgOS7EcQvErNDNJMinojrXqn/KKi3DMtUW",
     "user_role": "student",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoicmFqYXRoMzhAZ21haWwuY29tIiwiaWF0IjoxNjc5MzA1ODk3LCJleHAiOjE2NzkzMDk0OTd9.c23h_vJ722SCrlYrc9ty8_aLBl_seyzXg4GBxJMyL1A",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoicmFqYXRoMzhAZ21haWwuY29tIiwiaWF0IjoxNjc5MzExNjk3LCJleHAiOjE2NzkzMTUyOTd9.f7ChvU5qBl3MjzYSH-y-7hecs57tm0VQqSErqfHp0vY",
     "borrowed_books": [
       {
         "book_id": "10",

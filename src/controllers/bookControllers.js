@@ -79,7 +79,7 @@ const viewAllBook = async (req, res) => {
                 return res.json({
                     response_message: "Book details",
                     response_status: "200",
-                    bookData
+                    response_object: bookData
                 })
             }
             //when any one parameter is given 
@@ -98,7 +98,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -117,7 +117,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -136,7 +136,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -155,7 +155,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -175,7 +175,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -194,7 +194,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -214,7 +214,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -234,7 +234,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -253,7 +253,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -272,7 +272,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -294,7 +294,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -315,7 +315,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -336,7 +336,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -356,7 +356,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
@@ -376,7 +376,7 @@ const viewAllBook = async (req, res) => {
                     return res.json({
                         response_message: `Book details`,
                         response_status: '200',
-                        book
+                        response_object: book
                     })
                 }
             }
