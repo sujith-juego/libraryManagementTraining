@@ -11,7 +11,7 @@ userRoutes.post("/login", login)             //login for existing user
 
 userRoutes.post('/logout', logout)               //logout
 
-userRoutes.post('/updatePassword',updatePassword)                    //updating current password
+userRoutes.post('/updatePassword', updatePassword)                    //updating current password
 
 
 module.exports = userRoutes;      //exporting the user

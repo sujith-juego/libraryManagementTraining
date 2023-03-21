@@ -26,18 +26,16 @@ const register = async (req, res) => {
   try {
     //checking if empty
     if (!(user_name && mail && password)) {
-      return res.json({
-        response_message: "PLEASE ENTER ALL THE FIELDS",
-        response_status: "400"
-      })
+      return res
+        .status(400)
+        .json({ response_message: "PLEASE ENTER ALL THE FIELDS", response_status: "400" })
     }
     //mail validation
     let validEmail = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})$/
     if (!mail.match(validEmail) || (typeof user_name == "number") || (typeof password != "string")) {
-      return res.json({
-        response_message: "Invalid credentials",
-        response_status: "401"
-      })
+      return res
+        .status(401)
+        .json({ response_message: "Invalid credentials", response_status: "401" })
     }
 
     // user exists or not
@@ -47,10 +45,9 @@ const register = async (req, res) => {
       }
     )
     if (exixtingUser) {
-      return res.json({
-        response_message: "User Already Exists",
-        response_status: "404"
-      })
+      return res
+        .status(408)
+        .json({ response_message: "User Already Exists", response_status: "408" })
     }
 
     //return res.json(userData)  //==>working
@@ -87,26 +84,20 @@ const register = async (req, res) => {
     // })
     writeFile(path, jsonString, (error) => {
       if (error) {
-        return res.json({
-          response_message: `An error has occurred  ${error}`,
-          response_status: "422"
-        })
+        return res
+          .status(422)
+          .json({ response_message: `An error has occurred`, response_status: "422" })
       } else {
-        return res.json({
-          response_message: "User Registered Successfully",
-          response_status: "200",
-          response_object: obj
-
-        })
-
+        return res
+          .status(200)
+          .json({ response_message: "User Registered Successfully", response_status: "200", response_object: obj })
       }
     })
   } catch (error) {
     // console.log(error);
-    return res.json({
-      response_message: "Something went wrong",
-      response_status: "500"
-    })
+    return res
+      .status(500)
+      .json({ response_message: "Something went wrong", response_status: "500" })
   }
 
 }
@@ -115,20 +106,18 @@ const login = async (req, res) => {
   const { mail, password } = req.body
   try {
     if (!(mail && password)) {
-      return res.json({
-        response_message: "PLEASE ENTER ALL THE FIELDS",
-        response_status: "400"
-      })
+      return res
+        .status(400)
+        .json({ response_message: "PLEASE ENTER ALL THE FIELDS", response_status: "400" })
     }
     const user = await userData.find((userData) => {
       return userData.mail == mail
     })
     // console.log(user)        //==>working
     if (!user) {
-      return res.json({
-        response_message: "User Not Found",
-        response_status: "404"
-      })
+      return res
+        .status(404)
+        .json({ response_message: "User Not Found", response_status: "404" })
     }
     const index = userData.indexOf(user)
     // console.log(index)
@@ -152,31 +141,28 @@ const login = async (req, res) => {
 
       writeFile(path, jsonString, (error) => {
         if (error) {
-          return res.json({
-            response_message: `An error has occurred  ${error}`,
-            response_status: "422"
-          })
+          return res
+            .status(422)
+            .json({ response_message: `An error has occurred`, response_status: "422" })
         } else {
           return res
             .status(200)
-            .json({ message: "User Logged in Successfully", token })
+            .json({ message: "User Logged in Successfully", response_status: "200", token: token })
         }
       })
 
 
     } else {
-      return res.json({
-        response_message: "Invalid password",
-        response_status: "412"
-      })
+      return res
+        .status(412)
+        .json({ response_message: "Invalid password", response_status: "412" })
 
     }
   } catch (error) {
     {
-      return res.json({
-        response_message: "Something went wrong",
-        response_status: "500"
-      })
+      return res
+        .status(500)
+        .json({ response_message: "Something went wrong", response_status: "500" })
     }
   }
 }
@@ -197,26 +183,24 @@ const logout = async (req, res) => {
       const jsonString = JSON.stringify(userData, null, 2)
       writeFile(path, jsonString, (error) => {
         if (error) {
-          return res.json({
-            response_message: `An error has occurred  ${error}`,
-            response_status: "422"
-          })
+          return res
+            .status(422)
+            .json({ response_message: `An error has occurred`, response_status: "422" })
         } else {
           return res
             .status(202)
-            .json({ message: "User Logged out Successfully" })
+            .json({ message: "User Logged out Successfully", response_status: "202" })
         }
       })
+    } else {
+      return res
+        .status(423)
+        .json({ response_message: "An error has Occurred", response_status: "423" })
     }
-    return res.json({
-      response_message: "An error has Occurred",
-      response_status: "423"
-    })
   } catch (error) {
-    return res.json({
-      response_message: "Something went wrong",
-      response_status: "500"
-    })
+    return res
+      .status(500)
+      .json({ response_message: "Something went wrong", response_status: "500" })
   }
 }
 
@@ -225,16 +209,14 @@ const updatePassword = async (req, res) => {
   const { token, old_password, new_password } = req.body
   try {
     if (token === undefined || old_password === undefined || new_password === undefined) {
-      return res.json({
-        response_message: "PLEASE ENTER ALL THE FIELDS",
-        response_status: "400"
-      })
+      return res
+        .status(401)
+        .json({ response_message: "PLEASE ENTER ALL THE FIELDS", response_status: "401" })
     } else {
-      if(old_password == new_password){
-        return res.json({
-          response_message: "New password cannot be same as old password",
-          response_status: "412"
-        })
+      if (old_password == new_password) {
+        return res
+          .status(412)
+          .json({ response_message: "New password cannot be same as old password", response_status: "412" })
       }
       const user = await userData.find((userData) => {
         return userData.token == token
@@ -242,11 +224,10 @@ const updatePassword = async (req, res) => {
       // console.log(user)
       const expire = isTokenExpired(token)    //checking for token expiration
       if (expire) {
-        return res.json({
-          response_message: "Session Expired",
-          response_status: "401"
-        })
-      } else {
+        return res
+          .status(401)
+          .json({ response_message: "Session Expired", response_status: "401" })
+      } else if (user) {
         const bool = await bcrypt.compare(old_password, user.hashedPassword)
         if (bool) {
           const hashedPassword = await bcrypt.hash(new_password, 10)
@@ -254,30 +235,30 @@ const updatePassword = async (req, res) => {
           const jsonString = JSON.stringify(userData, null, 2)
           writeFile(path, jsonString, (error) => {
             if (error) {
-              return res.json({
-                response_message: `An error has occurred  ${error}`,
-                response_status: "422"
-              })
+              return res
+                .status(422)
+                .json({ response_message: `An error has occurred`, response_status: "422" })
             } else {
-              return res.json({
-                response_message: "Password Updated Successfully",
-                response_status: "200"
-              })
+              return res
+                .status(200)
+                .json({ response_message: "Password Updated Successfully", response_status: "200" })
             }
           })
         } else {
-          return res.json({
-            response_message: "Invalid password",
-            response_status: "412"
-          })
+          return res
+            .status(412)
+            .json({ response_message: "Invalid password", response_status: "412" })
         }
+      } else {
+        return res
+          .status(426)
+          .json({ response_message: "Please login to your account", response_status: "426" })
       }
     }
   } catch (error) {
-    return res.json({
-      response_message: "Something went wrong",
-      response_status: "500"
-    })
+    return res
+      .status(500)
+      .json({ response_message: "Something went wrong", response_status: "500" })
   }
 }
 

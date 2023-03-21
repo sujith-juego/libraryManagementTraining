@@ -59,7 +59,7 @@
     "mail": "rajath38@gmail.com",
     "hashedPassword": "$2b$10$ezmotjZ0yOgsqhNZuMaTgOS7EcQvErNDNJMinojrXqn/KKi3DMtUW",
     "user_role": "student",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWlsIjoicmFqYXRoMzhAZ21haWwuY29tIiwiaWF0IjoxNjc5MzExNjk3LCJleHAiOjE2NzkzMTUyOTd9.f7ChvU5qBl3MjzYSH-y-7hecs57tm0VQqSErqfHp0vY",
+    "token": null,
     "borrowed_books": [
       {
         "book_id": "10",
