@@ -4,7 +4,6 @@ const { viewAllBook, createBook, issueBook, displayBorrowedBook, returnBook } = 
 
 const bookRoutes = express.Router()
 
-// add , view, isse ,return
 
 bookRoutes.post("/createBook", createBook)      //Adding new book to library ==>admin access
 
@@ -19,5 +18,3 @@ bookRoutes.post("/returnBook", returnBook)           //to return book
 
 module.exports = bookRoutes;      //exporting the user
 
-
-// 3=>  , getAllBook, issueBook, returnBook

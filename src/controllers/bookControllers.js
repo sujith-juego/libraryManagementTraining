@@ -1,5 +1,4 @@
 const fs = require('fs')
-const jwt = require('jsonwebtoken')
 const process = require('process')
 
 // Importing date-and-time module
@@ -7,12 +6,9 @@ const date = require('date-and-time')
 
 const { writeFile } = require('fs')
 
-const auth = require('../middlewares/auth')
 const bookData = require('../json/bookJson.json')
 const userData = require('../json/userJson.json')
 const validation = require('../middlewares/auth')
-const { async } = require('rxjs')
-const { error } = require('console')
 const bookPath = process.cwd() + "/src/json/bookJson.json"
 const userPath = process.cwd() + "/src/json/userJson.json"
 
@@ -58,8 +54,6 @@ const viewAllBook = async (req, res) => {
 
     if (user) {
         // token verification
-        // const decode = jwt.verify(token, process.env.SECRET);
-        // const expire = isTokenExpired(token)
         const expire = validation.validToken(user)    //checking for token expiration
         if (!(expire)) {
             // login expired 
@@ -353,8 +347,6 @@ const createBook = async (req, res) => {
 
     if (user) {
         // token verification
-        // const decode = jwt.verify(token, process.env.SECRET)
-        // const expire = isTokenExpired(token)
         const expire = validation.validToken(user)    //checking for token expiration
         if (!(expire)) {
             // login expired 

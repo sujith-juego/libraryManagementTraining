@@ -1,6 +1,5 @@
 const express = require('express')
 const dotenv = require('dotenv')
-// const routes = express.Router()
 const userRoutes = require("./src/routes/userRoutes")
 const bookRoutes = require("./src/routes/bookRoutes")
 

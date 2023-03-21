@@ -1,6 +1,4 @@
-const { async } = require("rxjs")
 const jwt = require('jsonwebtoken')
-
 
 const validToken = async (user) => {
     const token = user.token

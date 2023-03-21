@@ -7,7 +7,6 @@ const bcrypt = require("bcrypt")
 const generateSafeId = require('generate-safe-id')
 const process = require('process')
 const { cwd } = require('process')
-const { token } = require('morgan')
 const path = process.cwd() + "/src/json/userJson.json"
 const validation = require('../middlewares/auth')
 
