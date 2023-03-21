@@ -501,7 +501,7 @@ const issueBook = async (req, res) => {
             } else {
                 return res
                     .status(200)
-                    .json({ response_message: "User issued with a book successfully", response_status: "200" })
+                    .json({ response_message: "Book Issued Successfully", response_status: "200" , response_object: book })
             }
         })
         bookData[Bindex].status = "2"
@@ -572,8 +572,8 @@ const returnBook = async (req, res) => {
     }
     if (book_id === undefined) {
         return res
-            .status(428)
-            .json({ response_message: "Please do provide the book id", response_status: "428" })
+            .status(427)
+            .json({ response_message: "Please do provide valid book id", response_status: "427" })
     }
     const user = await userData.find(
         (userData) => {

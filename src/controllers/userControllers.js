@@ -139,7 +139,7 @@ const login = async (req, res) => {
         } else {
           return res
             .status(200)
-            .json({ message: "User Logged in Successfully", response_status: "200", token: token })
+            .json({ response_message: "User Logged in Successfully", response_status: "200", token: token })
         }
       })
 
@@ -147,7 +147,7 @@ const login = async (req, res) => {
     } else {
       return res
         .status(412)
-        .json({ response_message: "Invalid password", response_status: "412" })
+        .json({ response_message: "Invalid Credentials", response_status: "412" })
 
     }
   } catch (error) {
@@ -181,13 +181,13 @@ const logout = async (req, res) => {
         } else {
           return res
             .status(202)
-            .json({ message: "User Logged out Successfully", response_status: "202" })
+            .json({ response_message: "User Logged out Successfully", response_status: "202" })
         }
       })
     } else {
       return res
-        .status(423)
-        .json({ response_message: "An error has Occurred", response_status: "423" })
+        .status(422)
+        .json({ response_message: "An error has Occurred", response_status: "422" })
     }
   } catch (error) {
     return res
