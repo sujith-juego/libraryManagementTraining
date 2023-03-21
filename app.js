@@ -12,6 +12,12 @@ app.use("/user", userRoutes)
 
 app.use("/book", bookRoutes)
 
+app.get('*', function (req, res) {
+    return res
+        .status(404)
+        .json({ response_message: "Not Found", response_status: (404) })
+})
+
 dotenv.config()
 const port = process.env.PORT || 8005
 app.listen(port, () => console.log(`Server started at port ${port}`))

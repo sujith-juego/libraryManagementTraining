@@ -9,15 +9,7 @@ const process = require('process')
 const { cwd } = require('process')
 const { token } = require('morgan')
 const path = process.cwd() + "/src/json/userJson.json"
-
-function isTokenExpired(token) {
-  const payloadBase64 = token.split('.')[1];
-  const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
-  const decoded = JSON.parse(decodedJson)
-  const exp = decoded.exp;
-  const expired = (Date.now() >= exp * 1000)
-  return expired
-}
+const validation = require('../middlewares/auth')
 
 
 const register = async (req, res) => {
@@ -222,8 +214,10 @@ const updatePassword = async (req, res) => {
         return userData.token == token
       })
       // console.log(user)
-      const expire = isTokenExpired(token)    //checking for token expiration
-      if (expire) {
+      // const expire = isTokenExpired(token)    //checking for token expiration
+      const expire = validation.validToken(user)    //checking for token expiration
+      // console.log(expire)
+      if (!(expire)) {
         return res
           .status(401)
           .json({ response_message: "Session Expired", response_status: "401" })

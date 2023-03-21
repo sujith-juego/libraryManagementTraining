@@ -10,21 +10,12 @@ const { writeFile } = require('fs')
 const auth = require('../middlewares/auth')
 const bookData = require('../json/bookJson.json')
 const userData = require('../json/userJson.json')
+const validation = require('../middlewares/auth')
 const { async } = require('rxjs')
 const { error } = require('console')
 const bookPath = process.cwd() + "/src/json/bookJson.json"
 const userPath = process.cwd() + "/src/json/userJson.json"
 
-
-// Token verification
-function isTokenExpired(token) {
-    const payloadBase64 = token.split('.')[1];
-    const decodedJson = Buffer.from(payloadBase64, 'base64').toString();
-    const decoded = JSON.parse(decodedJson)
-    const exp = decoded.exp;
-    const expired = (Date.now() >= exp * 1000)
-    return expired
-}
 
 //formatted date
 function format(inputDate) {
@@ -68,8 +59,9 @@ const viewAllBook = async (req, res) => {
     if (user) {
         // token verification
         // const decode = jwt.verify(token, process.env.SECRET);
-        const expire = isTokenExpired(token)
-        if (expire) {
+        // const expire = isTokenExpired(token)
+        const expire = validation.validToken(user)    //checking for token expiration
+        if (!(expire)) {
             // login expired 
             return res
                 .status(425)
@@ -362,8 +354,9 @@ const createBook = async (req, res) => {
     if (user) {
         // token verification
         // const decode = jwt.verify(token, process.env.SECRET)
-        const expire = isTokenExpired(token)
-        if (expire) {
+        // const expire = isTokenExpired(token)
+        const expire = validation.validToken(user)    //checking for token expiration
+        if (!(expire)) {
             // login expired 
             return res
                 .status(425)
@@ -434,9 +427,10 @@ const issueBook = async (req, res) => {
         })
     if (user) {
         //Validating token
-        const expire = isTokenExpired(token)
+        // const expire = isTokenExpired(token)
+        const expire = validation.validToken(user)    //checking for token expiration
         // console.log(expire)
-        if (expire) {
+        if (!(expire)) {
             // login expired
             return res
                 .status(425)
@@ -546,9 +540,10 @@ const displayBorrowedBook = async (req, res) => {
         })
     // console.log(user)
     if (user) {
-        const expire = isTokenExpired(token)
+        // const expire = isTokenExpired(token)
+        const expire = validation.validToken(user)    //checking for token expiration
         // console.log(expire)
-        if (expire) {
+        if (!(expire)) {
             // login expired
             return res
                 .status(425)
@@ -590,9 +585,10 @@ const returnBook = async (req, res) => {
         })
     if (user) {
         //Validating token
-        const expire = isTokenExpired(token)
+        // const expire = isTokenExpired(token)
+        const expire = validation.validToken(user)    //checking for token expiration
         // console.log(expire)
-        if (expire) {
+        if (!(expire)) {
             // login expired
             return res
                 .status(425)
@@ -713,3 +709,6 @@ const returnBook = async (req, res) => {
 
 
 module.exports = { viewAllBook, createBook, issueBook, displayBorrowedBook, returnBook }
+
+
+
