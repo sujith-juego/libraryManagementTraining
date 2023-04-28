@@ -1,3 +1,4 @@
+// Importing modules
 const fs = require('fs')
 const process = require('process')
 
@@ -6,9 +7,11 @@ const date = require('date-and-time')
 
 const { writeFile } = require('fs')
 
+// getting user and book data
 const bookData = require('../json/bookJson.json')
 const userData = require('../json/userJson.json')
 const validation = require('../middlewares/auth')
+// path for the user and book data
 const bookPath = process.cwd() + "/src/json/bookJson.json"
 const userPath = process.cwd() + "/src/json/userJson.json"
 
@@ -472,19 +475,12 @@ const issueBook = async (req, res) => {
                 return_day: null
             }
         }
-        // console.log(due_day)
-        // console.log(ub_obj)
-        // console.log(userData[Uindex])
-        // const borrow_index = user['borrowed_books'].length
-        // // console.log(borrow_index)
-        // const borrow = borrow_index + 1
+        
         user['borrowed_books'].push(ub_obj);
-        // console.log(user['borrowed_books'])
-        // console.log(userData[Uindex])
+    
         // Object.assign(userData[Uindex][1], { borrowed_books: ub_obj });
-        // console.log(userData[Uindex])
         const userjsonString = JSON.stringify(userData, null, 2)
-        // console.log(userjsonString)
+        // adding to user data
         writeFile(userPath, userjsonString, (error) => {
             if (error) {
                 return res
@@ -498,6 +494,7 @@ const issueBook = async (req, res) => {
         })
         bookData[Bindex].status = "2"
         const jsonString = JSON.stringify(bookData, null, 2)
+        // adding to book data
         writeFile(bookPath, jsonString, (error) => {
             if (error) {
                 return res
@@ -530,11 +527,9 @@ const displayBorrowedBook = async (req, res) => {
         (userData) => {
             return userData.token == token
         })
-    // console.log(user)
     if (user) {
         // const expire = isTokenExpired(token)
         const expire = validation.validToken(user)    //checking for token expiration
-        // console.log(expire)
         if (!(expire)) {
             // login expired
             return res
@@ -614,30 +609,16 @@ const returnBook = async (req, res) => {
         // userdata -> add book details he has returned
         const Uindex = userData.indexOf(user)
         const Bindex = bookData.indexOf(book)
-        // console.log(Uindex)
-        // console.log(Bindex)
         const returnd = new Date(Date.now())
         const return_day = format(returnd)
-        // const diffInMs   = new Date(return_day) - new Date(book.issued_date)
-        // const diffInDays = diffInMs / (1000 * 60 * 60 * 24)
-        // const moment = require('moment');
-        // const diffInDays = moment(returnd).diff(moment(book.due_day), 'days');
-        // console.log(diffInDays)
-        // const delay = date.subtract( return_day, book.due_day ).toDays()
-        // console.log(delay)
-
-
+        
         const borrow = user['borrowed_books']
-        // console.log(borrow)
         const bbook = await borrow.find(
             (borrow) => {
                 return borrow.book_id == book_id
             })
-        // console.log(bbook)
         const bbindex = borrow.indexOf(bbook)
-        // console.log(bbindex)
         const delay = date.subtract(new Date(return_day), new Date(bbook.due_day)).toDays()
-        // console.log(delay)
 
         ub_obj = {
             book_id: book_id,
@@ -699,8 +680,4 @@ const returnBook = async (req, res) => {
 
 
 
-
 module.exports = { viewAllBook, createBook, issueBook, displayBorrowedBook, returnBook }
-
-
-

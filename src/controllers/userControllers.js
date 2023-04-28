@@ -1,5 +1,3 @@
-const userData = require('../json/userJson.json')
-
 const fs = require('fs')             //filesystem library
 const jwt = require('jsonwebtoken')
 const { writeFile } = require('fs')
@@ -7,10 +5,11 @@ const bcrypt = require("bcrypt")
 const generateSafeId = require('generate-safe-id')
 const process = require('process')
 const { cwd } = require('process')
+const userData = require('../json/userJson.json')
 const path = process.cwd() + "/src/json/userJson.json"
 const validation = require('../middlewares/auth')
 
-
+// user rigister
 const register = async (req, res) => {
   const { user_name, mail, password } = req.body
 
@@ -41,15 +40,10 @@ const register = async (req, res) => {
         .json({ response_message: "User Already Exists", response_status: "408" })
     }
 
-    //return res.json(userData)  //==>working
-
     // if not exist then create new user
     let id = generateSafeId()         //creating unique id
     const hashedPassword = await bcrypt.hash(password, 10)     //password hashing
-    // return res.json(id)    =>working
-    // let index = userData.length + 1
-
-
+    // default role is student for all
     const obj = {
       user_id: id,
       user_name: user_name,
@@ -59,9 +53,7 @@ const register = async (req, res) => {
       token: null,
       borrowed_books: []
     }
-    // return res.json(obj) ===>working
     userData.push(obj);            //adding new user to the json object
-    // return res.json(userData)==>working
     const jsonString = JSON.stringify(userData, null, 2)
     // await fs.promises.writeFileSync('../json/userJson.json', jsonString )     
 
@@ -85,7 +77,6 @@ const register = async (req, res) => {
       }
     })
   } catch (error) {
-    // console.log(error);
     return res
       .status(500)
       .json({ response_message: "Something went wrong", response_status: "500" })
@@ -93,6 +84,7 @@ const register = async (req, res) => {
 
 }
 
+// user login
 const login = async (req, res) => {
   const { mail, password } = req.body
   try {
@@ -104,30 +96,23 @@ const login = async (req, res) => {
     const user = await userData.find((userData) => {
       return userData.mail == mail
     })
-    // console.log(user)        //==>working
     if (!user) {
       return res
         .status(404)
         .json({ response_message: "User Not Found", response_status: "404" })
     }
     const index = userData.indexOf(user)
-    // console.log(index)
     const bool = await bcrypt.compare(password, user.hashedPassword)
-    // console.log(bool)
 
     //  create jwt token = Authorization
     if (bool) {
-
       //create token
       const token = await jwt.sign({ mail: mail },
         process.env.SECRET, {
         expiresIn: '1h',
       });
-      // console.log(token)
       user.token = token
-      // console.log(user) //==>working
       //   userData.push(obj);            //adding user token to the json object
-      // return res.json(userData) //==>working
       const jsonString = JSON.stringify(userData, null, 2)
 
       writeFile(path, jsonString, (error) => {
@@ -166,10 +151,8 @@ const logout = async (req, res) => {
     const user = await userData.find((userData) => {
       return userData.token == token
     })
-    // console.log(user)        //==>working
     if (!(user.token == null)) {
       const index = userData.indexOf(user)
-      // console.log(index)
       userData[index].token = null
       const jsonString = JSON.stringify(userData, null, 2)
       writeFile(path, jsonString, (error) => {
@@ -212,10 +195,8 @@ const updatePassword = async (req, res) => {
       const user = await userData.find((userData) => {
         return userData.token == token
       })
-      // console.log(user)
       // const expire = isTokenExpired(token)    //checking for token expiration
       const expire = validation.validToken(user)    //checking for token expiration
-      // console.log(expire)
       if (!(expire)) {
         return res
           .status(401)
@@ -255,11 +236,5 @@ const updatePassword = async (req, res) => {
   }
 }
 
-
-
-
-
 //exports the function
 module.exports = { register, login, logout, updatePassword }
-
-

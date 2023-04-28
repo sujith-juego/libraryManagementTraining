@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 
+// token validation
 const validToken = async (user) => {
     const token = user.token
 

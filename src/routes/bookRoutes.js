@@ -4,7 +4,6 @@ const { viewAllBook, createBook, issueBook, displayBorrowedBook, returnBook } = 
 
 const bookRoutes = express.Router()
 
-
 bookRoutes.post("/createBook", createBook)      //Adding new book to library ==>admin access
 
 bookRoutes.post("/viewAllBook", viewAllBook)             //display all book details

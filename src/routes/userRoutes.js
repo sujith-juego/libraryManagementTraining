@@ -2,7 +2,6 @@ const express = require('express')               //importing express
 
 const { register, login, logout, updatePassword } = require('../controllers/userControllers')
 
-
 const userRoutes = express.Router()
 
 userRoutes.post("/register", register)      //register for new user
